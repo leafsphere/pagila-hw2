@@ -6,8 +6,7 @@
  * Use the film table and order by title.
  */
 
-SELECT film_id, title
-FROM film
+SELECT film_id, title FROM film
 WHERE rating IN (
     SELECT rating
     FROM film

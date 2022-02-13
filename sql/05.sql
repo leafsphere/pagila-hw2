@@ -9,3 +9,40 @@
  * HINT:
  * This can be solved using either a LEFT JOIN or the NOT IN operator.
  */
+
+SELECT last_name, first_name
+FROM actor
+LEFT JOIN customer USING (first_name, last_name)
+WHERE customer_id IS NULL
+ORDER BY (last_name, first_name);
+
+/*
+SELECT last_name, first_name
+FROM actor
+LEFT JOIN customer USING (first_name, last_name);
+WHERE customer_id IS NULL
+ORDER BY last_name, first_name;
+*/
+
+/*
+set operations treat entire thing as a set,
+must remove duplicates manually
+
+SELECT last_name, first_name
+FROM actor
+EXCEPT ALL
+SELECT actor.first_name, actor.last_name
+FROM actor
+JOIN customer USING (first_name, last_name)
+ORDER BY last_name, first_name;
+*/
+
+/* 
+SELECT last_name, first_name
+FROM actor
+WHERE 
+    (last_name,first_name) NOT IN (
+    SELECT last_name,first_name FROM customer
+)
+ORDER BY last_name, first_name;
+*/
